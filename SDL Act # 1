@@ -1,0 +1,54 @@
+3. Write a simple program to encrypt a text string using the look-up table or simple algorithm;
+for example, the text string “Hello World” could beencrypted into the string “ifm mp xpqme” 
+simple by translating eachcharacter into its next character in the alphabet- a becomes b, xbecomes y and so on.
+
+import tkinter as tk
+
+
+def encryption():
+    plaintext = input.get()
+    ciphertext = ""
+    for char in plaintext:
+        if char.isalpha():
+            ascii_offset = ord('a') if char.islower() else ord('A')
+            ciphertext += chr((ord(char) - ascii_offset + 1) % 26 + ascii_offset)
+        else:
+            ciphertext += char
+    output.config(state=tk.NORMAL)
+    output.delete(1.0, tk.END)
+    output.insert(tk.END, ciphertext)
+    output.config(state=tk.DISABLED)
+
+
+root = tk.Tk()
+root.configure(bg='gold')
+root.title("Group 3's Encryption Tool")
+
+# Create header
+header = tk.Label(root, text="Encryption Tool", fg='#212121', bg='gold', font=('Fixedsys', 40))
+header.pack()
+
+# Create separator line
+separator = tk.Frame(root, height=2, bg='#212121')
+separator.pack(fill=tk.X, pady=5)
+
+# Create labels and entry widget
+label1 = tk.Label(root, text="Input text:", fg='#212121', bg='#F2F2F2', font=('FixedSys', 20))
+label1.pack()
+
+input = tk.Entry(root, width=50, borderwidth=3, fg='#212121', bg='#F2F2F2', font=('FixedSys', 20))
+input.pack(padx=10, pady=10)
+
+# Create button and output widget
+button = tk.Button(root, text="Encrypt", borderwidth=5, command=encryption, fg='#212121', bg='#F2F2F2',
+                   font=['FixedSys', 25])
+button.pack(padx=10, pady=10)
+
+label2 = tk.Label(root, text="Ciphered input:", fg='#212121', bg='#F2F2F2', font=('FixedSys', 20))
+label2.pack()
+
+output = tk.Text(root, height=10, width=50, borderwidth=5, state=tk.DISABLED, fg='#212121', bg='#F2F2F2',
+                 font=['FixedSys', 20])
+output.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
+
+root.mainloop()
