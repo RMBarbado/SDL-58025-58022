@@ -9,7 +9,9 @@ def encryption():
     plaintext = input.get()
     ciphertext = ""
     for char in plaintext:
-        if char.isalpha():
+        if char.isdigit():
+            ciphertext += str((int(char) + 1) % 99)
+        elif char.isalpha():
             ascii_offset = ord('a') if char.islower() else ord('A')
             ciphertext += chr((ord(char) - ascii_offset + 1) % 26 + ascii_offset)
         else:
@@ -52,3 +54,4 @@ output = tk.Text(root, height=10, width=50, borderwidth=5, state=tk.DISABLED, fg
 output.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 
 root.mainloop()
+
